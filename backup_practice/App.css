@@ -23,18 +23,6 @@ div {
   font-size: 18px;
 }
 
-.drop-areas {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.message {
-  color: red;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
