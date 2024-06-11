@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const DropArea = ({ color, onDrop }) => {
     const handleDragOver = (event) => {
