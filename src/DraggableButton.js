@@ -9,6 +9,7 @@ const DraggableButton = ({ color }) => {
         event.dataTransfer.setData('color', color);
     };
     const handleTouchStart = (event) => {
+        event.preventDefault();
         setIsDragging(true);
         setTouchPosition({
             x: event.touches[0].clientX,
@@ -18,6 +19,7 @@ const DraggableButton = ({ color }) => {
     };
 
     const handleTouchMove = (event) => {
+        event.preventDefault();
         const touch = event.touches[0];
         // const target = document.elementFromPoint(touch.clientX, touch.clientY);
         // if (target) {
@@ -30,6 +32,7 @@ const DraggableButton = ({ color }) => {
     };
 
     const handleTouchEnd = (event) => {
+        event.preventDefault();
         setIsDragging(false);
         const touch = event.changedTouches[0];
         const target = document.elementFromPoint(touch.clientX, touch.clientY);
