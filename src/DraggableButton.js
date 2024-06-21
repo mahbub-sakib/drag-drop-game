@@ -56,6 +56,7 @@ const DraggableButton = ({ color }) => {
                     border: '1px solid black',
                     padding: '8px 16px',
                     cursor: 'move',
+                    touchAction: 'none'
                 }}
             >
                 Drag me
