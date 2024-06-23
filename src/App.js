@@ -23,6 +23,7 @@ function App() {
   const [buttonColor, setButtonColor] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState('');
+  const [shakeDropArea, setShakeDropArea] = useState(null);
 
   useEffect(() => {
     generateNewGame();
@@ -43,13 +44,13 @@ function App() {
   };
 
   const handleDrop = (droppedColor, dropAreaColor) => {
-    // console.log('Dropped Color:', droppedColor);  // Debugging line
-    // console.log('Drop Area Color:', dropAreaColor);  // Debugging line
 
     if (droppedColor === dropAreaColor) {
       setShowModal(true);
     } else {
       setMessage(`Color didn't match! Try again.`);
+      setShakeDropArea(dropAreaColor);
+      setTimeout(() => setShakeDropArea(null), 500); // Remove shake class after animation
     }
   };
 
@@ -64,7 +65,7 @@ function App() {
       {buttonColor && <DraggableButton key={buttonColor} color={buttonColor} />}
       <div className="drop-areas">
         {dropAreas.map((color, index) => (
-          <DropArea key={index} color={color} onDrop={handleDrop} />
+          <DropArea key={index} color={color} onDrop={handleDrop} shouldShake={shakeDropArea === color} />
         ))}
       </div>
       {message && <p className="message">{message}</p>}

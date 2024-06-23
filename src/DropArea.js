@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import './DropArea.css';
 
-const DropArea = ({ color, onDrop }) => {
+const DropArea = ({ color, onDrop, shouldShake }) => {
 
     const handleDragOver = (event) => {
         event.preventDefault();
@@ -8,11 +9,7 @@ const DropArea = ({ color, onDrop }) => {
     const handleDrop = (event) => {
         event.preventDefault();
         const droppedColor = event.dataTransfer ? event.dataTransfer.getData('color') : event.detail.color;
-        // console.log('Dropped color:', droppedColor);
-        // console.log('area color:', color);
-        // console.log('event:', event);
         onDrop(droppedColor, color);
-        // onDrop(droppedColor);
     };
 
     useEffect(() => {
@@ -26,6 +23,7 @@ const DropArea = ({ color, onDrop }) => {
     return (
         <div
             id={color}
+            className={`${shouldShake ? 'shake' : ''}`}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             style={{
