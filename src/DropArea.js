@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 
 const DropArea = ({ color, onDrop }) => {
+
     const handleDragOver = (event) => {
         event.preventDefault();
     };
     const handleDrop = (event) => {
         event.preventDefault();
-        const droppedColor = event.dataTransfer ? event.dataTransfer.getData('color') : event.detail;
-        console.log('Dropped color:', droppedColor);
+        const droppedColor = event.dataTransfer ? event.dataTransfer.getData('color') : event.detail.color;
+        // console.log('Dropped color:', droppedColor);
+        // console.log('area color:', color);
+        // console.log('event:', event);
         onDrop(droppedColor, color);
+        // onDrop(droppedColor);
     };
 
     useEffect(() => {
@@ -17,7 +21,7 @@ const DropArea = ({ color, onDrop }) => {
         return () => {
             dropArea.removeEventListener('drop', handleDrop);
         };
-    }, []);
+    }, [color]);
 
     return (
         <div

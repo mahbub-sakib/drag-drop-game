@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const DraggableButton = ({ color }) => {
+    console.log('color:', color);
     const [isDragging, setIsDragging] = useState(false);
     const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
+    const [buttonColor, setButtonColor] = useState(color);
     const buttonRef = useRef(null);
 
     const handleDragStart = (event) => {
-        event.dataTransfer.setData('color', color);
+        event.dataTransfer.setData('color', buttonColor);
     };
 
     const handleTouchStart = (event) => {
@@ -16,7 +18,6 @@ const DraggableButton = ({ color }) => {
             x: event.touches[0].clientX,
             y: event.touches[0].clientY,
         });
-        event.target.dataset.color = color;
     };
 
     const handleTouchMove = (event) => {
@@ -34,10 +35,11 @@ const DraggableButton = ({ color }) => {
         const touch = event.changedTouches[0];
         const target = document.elementFromPoint(touch.clientX, touch.clientY);
         if (target) {
-            const droppedColor = event.target.dataset.color;
-            console.log(`Dropped color: ${droppedColor}`);
-            console.log(`Target color: ${target.id}`);
-            const dropEvent = new CustomEvent('drop', { detail: droppedColor });
+            console.log(`dhukse`);
+
+            console.log('Touch end event target:', target);
+            console.log(`Dropped color: ${buttonColor}`);
+            const dropEvent = new CustomEvent('drop', { detail: { color: buttonColor } });
             target.dispatchEvent(dropEvent);
         }
     };
@@ -65,7 +67,7 @@ const DraggableButton = ({ color }) => {
                 draggable
                 onDragStart={handleDragStart}
                 style={{
-                    backgroundColor: color,
+                    backgroundColor: buttonColor,
                     border: '1px solid black',
                     padding: '8px 16px',
                     cursor: 'move',
@@ -83,7 +85,7 @@ const DraggableButton = ({ color }) => {
                         left: touchPosition.x - 50, // Center the ghost element
                         width: '100px',
                         height: '50px',
-                        backgroundColor: color,
+                        backgroundColor: buttonColor,
                         opacity: 0.7,
                         pointerEvents: 'none', // Prevent interference with touch events
                     }}

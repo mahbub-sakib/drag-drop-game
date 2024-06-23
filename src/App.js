@@ -34,14 +34,17 @@ function App() {
     const randomIndex = Math.floor(Math.random() * 3);
     const newButtonColor = newDropAreas[randomIndex];
 
+    console.log('New drop areas:', newDropAreas);
+    console.log('New button color:', newButtonColor);
+
     setDropAreas(newDropAreas);
     setButtonColor(newButtonColor);
     setMessage('');
   };
 
   const handleDrop = (droppedColor, dropAreaColor) => {
-    console.log('Dropped Color:', droppedColor);  // Debugging line
-    console.log('Drop Area Color:', dropAreaColor);  // Debugging line
+    // console.log('Dropped Color:', droppedColor);  // Debugging line
+    // console.log('Drop Area Color:', dropAreaColor);  // Debugging line
 
     if (droppedColor === dropAreaColor) {
       setShowModal(true);
@@ -58,7 +61,7 @@ function App() {
   return (
     <div className="App">
       <h1>Color Matching Game</h1>
-      <DraggableButton color={buttonColor} />
+      {buttonColor && <DraggableButton key={buttonColor} color={buttonColor} />}
       <div className="drop-areas">
         {dropAreas.map((color, index) => (
           <DropArea key={index} color={color} onDrop={handleDrop} />
