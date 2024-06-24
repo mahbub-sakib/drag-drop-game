@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DraggableButton from './DraggableButton';
 import DropArea from './DropArea';
 import SuccessModal from './SuccessModal';
+
 import './App.css';
 
 const colors = ['red', 'green', 'blue', 'yellow', 'orange', 'purple', 'cyan', 'magenta'];
